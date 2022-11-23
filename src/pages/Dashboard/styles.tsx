@@ -7,27 +7,21 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-    flex-direction: row;
-    justify-content: space-around;
-    height: 60px;
+    height: 120px;
+    border-width: 2px;
+    border-radius: 5px;
 `;
 
-export const Main = styled.View``;
+export const Main = styled.View`
+    height: 400px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+`;
 export const Footer = styled.View`
     height: 80px;
     justify-content: center;
     align-items: center;
-`;
-
-export const Player = styled.Text`
-    padding: 10px;
-    font-weight: bold;
-    font-size: 22px;
-`;
-
-export const Placar = styled.Text`
-    font-size: 40px;
-    font-weight: bold;
-    bottom: 20px;
 `;
 

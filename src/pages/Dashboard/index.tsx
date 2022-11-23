@@ -1,5 +1,8 @@
 import React from "react";
+import { BoardButtons } from "../../components/BoardButtons";
 import { Button } from "../../components/Button";
+import { Players } from "../../components/Players";
+
 
 
 import {
@@ -7,8 +10,7 @@ import {
     Header,
     Main,
     Footer,
-    Player,
-    Placar,
+   
 
 } from './styles';
 
@@ -16,13 +18,18 @@ export function Dashboard(){
     return(
         <Container>
             <Header>
-                <Player>Jogo1</Player>
-                <Player>Jogo2</Player>
-                <Placar>Placar1</Placar>
-                <Placar>Placar2</Placar>
+                <Players />
             </Header>
             <Main>
-                
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
+                <BoardButtons />
             </Main>
             <Footer>
                 <Button></Button>
