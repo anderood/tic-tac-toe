@@ -1,10 +1,16 @@
 import React from "react";
 import { Buttons, Title } from "./styles";
 
-export function BoardButtons(){
+interface Props {
+    item: number;
+    title: string;
+    onPress: (item: number) => void;
+}
+
+export function BoardButtons({ item, title, onPress }: Props ){
     return(
-        <Buttons>
-            <Title>X</Title>
+        <Buttons onPress={()=>onPress( item )}>
+            <Title>{ title }</Title>
         </Buttons>
     );
 }
