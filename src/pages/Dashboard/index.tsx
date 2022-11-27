@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { BoardButtons } from "../../components/BoardButtons";
-import { Button } from "../../components/Button";
 import { Players } from "../../components/Players";
+
+import { Button } from "../../components/Button";
 
 
 
@@ -11,21 +11,40 @@ import {
     Main,
     Footer,
 } from './styles';
+import { ContainerButtons } from "../Home/styles";
 
 export function Dashboard(){
 
-    const initialValues = {
-        content: {
+    
+    const initialValues = [
+        {
             board: ["","","","","","","","","",],
-            player: ["X", "O"],
-            isDisabled: true
         }
-    }
+    ]
 
     const [ item, setItem ] = useState(initialValues);
+    const [ status, setStatus ] = useState(true);
 
-    function handlePressButtons(idx: number){
-        console.log(idx)
+    function handleTeste(idx: number){
+        
+        const newState = item[0].board.map((elem, index, arr) => {
+            if(idx === index) {
+                status ? arr[idx] = "X" : arr[idx] = "O";  
+            } 
+            return {...item[0], arr};
+        });
+
+        setItem([...newState])
+        setStatus(!status)
+    }
+
+    function handleReset(){
+
+        const nextReset = item[0].board.map((elem, i, arr) => {
+            return arr;
+        })
+
+        setItem(nextReset => [...nextReset])
     }
     
     return(
@@ -35,18 +54,20 @@ export function Dashboard(){
             </Header>
             <Main>
                 {
-                    item.content.board.map((item, idx) => (
-                        <BoardButtons 
-                            key={idx}
-                            item={idx}
-                            title={"X"}
-                            onPress={()=>handlePressButtons(idx)}
-                        />
-                    ))
+                    item[0].board.map( (elem, idx) => 
+                        <Button 
+                            key={idx} 
+                            title={item[0].board[idx]} 
+                            onPress={ () => handleTeste(idx)} 
+                        />)
                 }
+
             </Main>
             <Footer>
-                <Button title={"Reset"}></Button>
+                <Button 
+                    title="Reset"
+                    onPress={handleReset}
+                />
             </Footer>
         </Container>
     );

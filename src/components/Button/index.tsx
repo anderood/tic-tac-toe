@@ -1,18 +1,17 @@
 import React from "react";
+import { Text } from 'react-native';
 
-import { Container, Title, } from "./styles";
+import { Container, Title } from './styles';
 
-interface Props {
+interface ButtonProps{
     title: string;
+    onPress: ()=>void;
 }
 
-export function Button({ title }: Props){
-
-
+export function Button({ title, onPress }: ButtonProps){
     return(
-        <Container>
+        <Container onPress={onPress} >
             <Title>{title}</Title>
         </Container>
     );
-
 }

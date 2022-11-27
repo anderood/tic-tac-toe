@@ -10,7 +10,6 @@ import {
 } from './styles';
 
 const logo = require('../../assets/logo.jpg');
-import { Button } from "../../components/Button";
 
 export function Home(){
     return(
@@ -20,7 +19,6 @@ export function Home(){
                 <Title>Jogo da Velha</Title>
             </ContainerImg>
             <ContainerButtons>
-                <Button></Button>
             </ContainerButtons>
         </Container>
 
