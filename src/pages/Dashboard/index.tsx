@@ -38,13 +38,11 @@ export function Dashboard(){
         setStatus(!status)
     }
 
+
     function handleReset(){
 
-        const nextReset = item[0].board.map((elem, i, arr) => {
-            return arr;
-        })
-
-        setItem(nextReset => [...nextReset])
+        setItem([ {board: ["","","","","","","","","",]}])
+        setStatus(true)
     }
     
     return(
