@@ -6,7 +6,15 @@ import {
     Placar,
 } from './styles';
 
-export function Players(){
+
+interface PlayersProps {
+    points: {
+        point: number
+    }
+}
+
+export function Players({ points }: PlayersProps){
+    console.log(points.point)
     return(
         <>
             <Container>
@@ -15,8 +23,8 @@ export function Players(){
             </Container>
             
             <Container>
-                <Placar>0</Placar>
-                <Placar>0</Placar>
+                <Placar>{points.point}</Placar>
+                <Placar>{points.point}</Placar>
             </Container>
         </>
     );

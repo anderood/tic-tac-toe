@@ -16,6 +16,7 @@ import { ContainerButtons } from "../Home/styles";
 export function Dashboard(){
 
     
+    const initialPoints = [1,0]
     const initialValues = [
         {
             board: ["","","","","","","","","",],
@@ -24,6 +25,7 @@ export function Dashboard(){
 
     const [ item, setItem ] = useState(initialValues);
     const [ status, setStatus ] = useState(true);
+    const [ points, setPoints ] = useState(initialPoints);
 
     function handleTeste(idx: number){
         
@@ -84,9 +86,11 @@ export function Dashboard(){
     return(
         <Container>
             <Header>
-                <Players />
+                {
+                    points.map(point => (<Players points={point} />))
+                }
             </Header>
-            <Main>
+            {/* <Main>
                 {
                     item[0].board.map( (elem, idx) => 
                         <Button 
@@ -96,7 +100,7 @@ export function Dashboard(){
                         />)
                 }
 
-            </Main>
+            </Main> */}
             <Footer>
                 <Button 
                     title="Reset"
