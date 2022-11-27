@@ -34,8 +34,44 @@ export function Dashboard(){
             return {...item[0], arr};
         });
 
+        handleCheckWinner()
         setItem([...newState])
         setStatus(!status)
+    }
+
+    function handleCheckWinner(){
+
+        // Primeira, segunda e terceira Coluna
+        if(item[0].board[0] == "X" && item[0].board[1] == "X" && item[0].board[2] == "X" || item[0].board[0] == "O" && item[0].board[1] == "O" && item[0].board[2] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+        if(item[0].board[3] == "X" && item[0].board[4] == "X" && item[0].board[5] == "X" || item[0].board[3] == "O" && item[0].board[4] == "O" && item[0].board[5] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+        if(item[0].board[6] == "X" && item[0].board[7] == "X" && item[0].board[8] == "X" || item[0].board[6] == "O" && item[0].board[7] == "O" && item[0].board[8] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+        
+        // Primeira SEgunda e Terceira Linha
+        if(item[0].board[0] == "X" && item[0].board[3] == "X" && item[0].board[6] == "X" || item[0].board[0] == "O" && item[0].board[3] == "O" && item[0].board[6] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+            
+        }
+        if(item[0].board[1] == "X" && item[0].board[4] == "X" && item[0].board[7] == "X" || item[0].board[1] == "O" && item[0].board[4] == "O" && item[0].board[7] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+        if(item[0].board[2] == "X" && item[0].board[5] == "X" && item[0].board[8] == "X" || item[0].board[2] == "O" && item[0].board[5] == "O" && item[0].board[8] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+        
+        // 
+        if(item[0].board[0] == "X" && item[0].board[4] == "X" && item[0].board[8] == "X" || item[0].board[0] == "O" && item[0].board[4] == "O" && item[0].board[8] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+        if(item[0].board[6] == "X" && item[0].board[4] == "X" && item[0].board[2] == "X" || item[0].board[6] == "O" && item[0].board[4] == "O" && item[0].board[2] == "O"){
+            status == true ? alert('Player 1 ganhou') : alert('Player 2 ganhou')
+        }
+
     }
 
 
