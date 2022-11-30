@@ -7,7 +7,11 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-    height: 120px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 100px;
     border-width: 2px;
     border-radius: 5px;
 `;

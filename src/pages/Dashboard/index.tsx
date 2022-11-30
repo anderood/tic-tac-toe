@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Players } from "../../components/Players";
+import { Text } from 'react-native';
+import { Player } from "../../components/Player";
 
 import { Button } from "../../components/Button";
 
@@ -86,11 +87,10 @@ export function Dashboard(){
     return(
         <Container>
             <Header>
-                {
-                    points.map(point => (<Players points={point} />))
-                }
+                <Player />
+                <Player />
             </Header>
-            {/* <Main>
+            <Main>
                 {
                     item[0].board.map( (elem, idx) => 
                         <Button 
@@ -100,7 +100,7 @@ export function Dashboard(){
                         />)
                 }
 
-            </Main> */}
+            </Main>
             <Footer>
                 <Button 
                     title="Reset"
