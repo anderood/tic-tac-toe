@@ -1,11 +1,16 @@
 import React from "react";
 import { Container, Placar, Titulo } from "./styles";
 
-export function Player(){
+interface PropsPlayer{
+    title: string
+    scoresPoints: number;
+}
+
+export function Player( { title, scoresPoints }: PropsPlayer){
     return(
         <Container>
-            <Titulo>Titulo 1</Titulo>
-            <Placar>0</Placar>
+            <Titulo>{title}</Titulo>
+            <Placar>{scoresPoints}</Placar>
         </Container>
     );
 }
