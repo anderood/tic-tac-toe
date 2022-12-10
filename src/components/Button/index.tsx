@@ -8,7 +8,7 @@ interface ButtonProps{
     disabled: boolean
 }
 
-export function Button({ title, onPress, disabled }: ButtonProps){
+export function Button({ title, onPress, disabled = false }: ButtonProps){
     return(
         <Container onPress={onPress} disabled={disabled}>
             <Title>{title}</Title>

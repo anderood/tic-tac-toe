@@ -114,17 +114,18 @@ export function Dashboard(){
                     item[0].board.map( (elem, idx) => 
                         <Button 
                             key={idx} 
-                            disabled={item[0].board[idx] ? true : false}
                             title={item[0].board[idx]} 
                             onPress={ () => handleTeste(idx)} 
-                        />)
-                }
+                            disabled={item[0].board[idx] ? true : false}
+                            />)
+                        }
 
             </Main>
             <Footer>
                 <Button 
                     title="Reset"
                     onPress={handleReset}
+                    disabled={false}
                 />
             </Footer>
         </Container>
