@@ -25,6 +25,8 @@ export function Dashboard(){
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
 
     function handleTeste(idx: number){
+
+        console.log({idx: idx, item})
         
         const newState = item[0].board.map((elem, index, arr) => {
             if(idx === index) {
@@ -112,6 +114,7 @@ export function Dashboard(){
                     item[0].board.map( (elem, idx) => 
                         <Button 
                             key={idx} 
+                            disabled={item[0].board[idx] ? true : false}
                             title={item[0].board[idx]} 
                             onPress={ () => handleTeste(idx)} 
                         />)
