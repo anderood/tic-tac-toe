@@ -18,7 +18,7 @@ export function Dashboard(){
     const InitialScorePoints = [ { score: [0,0] }]
 
     const [ item, setItem ] = useState(initialValues);
-    const [ status, setStatus ] = useState(true);
+    const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState(InitialScorePoints);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
@@ -26,51 +26,62 @@ export function Dashboard(){
 
     function handleTeste(idx: number){
 
-        console.log({idx: idx, item})
-        
         const newState = item[0].board.map((elem, index, arr) => {
             if(idx === index) {
-                status ? arr[idx] = "X" : arr[idx] = "O";  
+                changeplayer ? arr[idx] = "X" : arr[idx] = "O";  
             } 
             return {...item[0], arr};
         });
 
-        handleCheckWinner()
         setItem([...newState])
-        setStatus(!status)
+        setChangeplayer(!changeplayer)
+        handleCheckWinner()
     }
 
     function handleCheckWinner(){
 
-        // Primeira, segunda e terceira Coluna
         if(item[0].board[0] == "X" && item[0].board[1] == "X" && item[0].board[2] == "X" || item[0].board[0] == "O" && item[0].board[1] == "O" && item[0].board[2] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
         if(item[0].board[3] == "X" && item[0].board[4] == "X" && item[0].board[5] == "X" || item[0].board[3] == "O" && item[0].board[4] == "O" && item[0].board[5] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
         if(item[0].board[6] == "X" && item[0].board[7] == "X" && item[0].board[8] == "X" || item[0].board[6] == "O" && item[0].board[7] == "O" && item[0].board[8] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
         
-        // Primeira SEgunda e Terceira Linha
         if(item[0].board[0] == "X" && item[0].board[3] == "X" && item[0].board[6] == "X" || item[0].board[0] == "O" && item[0].board[3] == "O" && item[0].board[6] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
             
         }
         if(item[0].board[1] == "X" && item[0].board[4] == "X" && item[0].board[7] == "X" || item[0].board[1] == "O" && item[0].board[4] == "O" && item[0].board[7] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
         if(item[0].board[2] == "X" && item[0].board[5] == "X" && item[0].board[8] == "X" || item[0].board[2] == "O" && item[0].board[5] == "O" && item[0].board[8] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
         
-        // 
         if(item[0].board[0] == "X" && item[0].board[4] == "X" && item[0].board[8] == "X" || item[0].board[0] == "O" && item[0].board[4] == "O" && item[0].board[8] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
         if(item[0].board[6] == "X" && item[0].board[4] == "X" && item[0].board[2] == "X" || item[0].board[6] == "O" && item[0].board[4] == "O" && item[0].board[2] == "O"){
             handleScorePoints();
+            handleReset();
+            setChangeplayer(true)
         }
 
     }
@@ -78,13 +89,13 @@ export function Dashboard(){
     function handleReset(){
 
         setItem([ {board: ["","","","","","","","","",]}])
-        setStatus(true)
+        setChangeplayer(true)
     }
 
     function handleScorePoints(){
 
         scores[0].score.map((item, idx, arr) => {
-            if(status === true){
+            if(changeplayer === true){
                 setScoresPlayer1(scoresPlayer1 +1)
                 arr[0] = scoresPlayer1;
                 alert("Player 1, Ganhou")
