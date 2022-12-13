@@ -24,7 +24,7 @@ export function Dashboard(){
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
 
-    function handleTeste(idx: number){
+    function handleCheckPlayer(idx: number){
 
         const newState = item[0].board.map((elem, index, arr) => {
             if(idx === index) {
@@ -35,7 +35,7 @@ export function Dashboard(){
 
         setItem([...newState])
         setChangeplayer(!changeplayer)
-        handleCheckWinner()
+        handleCheckWinner();
     }
 
     function handleCheckWinner(){
@@ -126,10 +126,10 @@ export function Dashboard(){
                         <Button 
                             key={idx} 
                             title={item[0].board[idx]} 
-                            onPress={ () => handleTeste(idx)} 
+                            onPress={ () => handleCheckPlayer(idx)} 
                             disabled={item[0].board[idx] ? true : false}
-                            />)
-                        }
+                        />)
+                }
 
             </Main>
             <Footer>
