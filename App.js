@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { Home } from './src/pages/Home';
-import { Dashboard } from './src/pages/Dashboard';
+import { NavigationContainer } from '@react-navigation/native';
+import { AppRoutes } from './src/routes/app.routes'
 
 export default function App() {
   return (
-    <Dashboard />
+    <NavigationContainer>
+      <AppRoutes />
+    </NavigationContainer>
   );
 }
