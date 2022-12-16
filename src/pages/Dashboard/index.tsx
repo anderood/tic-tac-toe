@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Player } from "../../components/Player";
+import { ButtonBoard } from "../../components/ButtonBoard";
 import { Button } from "../../components/Button";
 
 import {
@@ -123,7 +124,7 @@ export function Dashboard(){
             <Main>
                 {
                     item[0].board.map( (elem, idx) => 
-                        <Button 
+                        <ButtonBoard 
                             key={idx} 
                             title={item[0].board[idx]} 
                             onPress={ () => handleCheckPlayer(idx)} 
