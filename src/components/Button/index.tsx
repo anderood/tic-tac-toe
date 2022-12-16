@@ -5,7 +5,7 @@ import { Container, Title } from './styles';
 interface ButtonProps{
     title: string;
     onPress: ()=>void;
-    disabled: boolean
+    disabled?: boolean
 }
 
 export function Button({ title, onPress, disabled = false }: ButtonProps){

@@ -12,7 +12,7 @@ import {
 const logo = require('../../assets/logo.jpg');
 import { Button } from '../../components/Button';
 
-export function Home(){
+export function Home({ navigation }){
     return(
         <Container>
             <ContainerImg>
@@ -22,6 +22,7 @@ export function Home(){
             <ContainerButtons>
                 <Button 
                     title="Iniciar"
+                    onPress={ ()=> navigation.navigate('Dashboard') }
                 />
             </ContainerButtons>
         </Container>
