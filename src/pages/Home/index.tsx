@@ -3,6 +3,7 @@ import React from "react";
 import {
     Container,
     ContainerImg,
+    ContainerTitle,
     Image,
     Title,
     ContainerButtons,
@@ -17,11 +18,17 @@ export function Home({ navigation }){
         <Container>
             <ContainerImg>
                 <Image source={logo}/>
-                <Title>Jogo da Velha</Title>
             </ContainerImg>
+            <ContainerTitle>
+                <Title>Jogo da Velha</Title>
+            </ContainerTitle>
             <ContainerButtons>
                 <Button 
-                    title="Iniciar"
+                    title="Um Jogador"
+                    onPress={ ()=> navigation.navigate('Dashboard') }
+                />
+                <Button 
+                    title="Dois Jogadores"
                     onPress={ ()=> navigation.navigate('Dashboard') }
                 />
             </ContainerButtons>

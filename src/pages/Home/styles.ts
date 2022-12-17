@@ -3,11 +3,17 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     flex: 1;
     background-color: #605090;
+    justify-content: center;
 `;
 
 export const ContainerImg = styled.View`
     /* height: 400px; */
-    padding: 100px 30px;
+    /* padding: 60px 30px; */
+    justify-content: center;
+    align-items: center;
+`;
+
+export const ContainerTitle = styled.View`
     justify-content: center;
     align-items: center;
 `;
@@ -15,6 +21,7 @@ export const ContainerImg = styled.View`
 export const Image = styled.Image`
     width: 250px;
     height: 250px;
+    margin: 30px 30px;
 `;
 
 export const Title = styled.Text`
