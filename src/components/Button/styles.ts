@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 export const Container = styled.TouchableOpacity`
-    background-color: yellow;
+    background-color: #ffeb3b;
     border-radius: 7px;
     margin-top: 14px;
     padding: 16px;

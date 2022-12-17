@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
     flex: 1;
-    background-color: #DDD;
+    background-color: #605090;
     justify-content: center;
 `;
 
@@ -11,8 +11,8 @@ export const Header = styled.View`
     justify-content: space-around;
     align-items: center;
 
-    height: 100px;
-    border-width: 2px;
+    height: 120px;
+    border: 2px solid #fff;
     border-radius: 5px;
 `;
 
