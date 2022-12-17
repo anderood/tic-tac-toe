@@ -25,6 +25,17 @@ export function Dashboard(){
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
 
+    const winner = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8], 
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [6,4,2]
+    ];
+
     function handleCheckPlayer(idx: number){
 
         const newState = item[0].board.map((elem, index, arr) => {
@@ -37,54 +48,37 @@ export function Dashboard(){
         setItem([...newState])
         setChangeplayer(!changeplayer)
         handleCheckWinner();
+        handleBoardFull();
+        
     }
 
     function handleCheckWinner(){
 
-        if(item[0].board[0] == "X" && item[0].board[1] == "X" && item[0].board[2] == "X" || item[0].board[0] == "O" && item[0].board[1] == "O" && item[0].board[2] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
-        if(item[0].board[3] == "X" && item[0].board[4] == "X" && item[0].board[5] == "X" || item[0].board[3] == "O" && item[0].board[4] == "O" && item[0].board[5] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
-        if(item[0].board[6] == "X" && item[0].board[7] == "X" && item[0].board[8] == "X" || item[0].board[6] == "O" && item[0].board[7] == "O" && item[0].board[8] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
-        
-        if(item[0].board[0] == "X" && item[0].board[3] == "X" && item[0].board[6] == "X" || item[0].board[0] == "O" && item[0].board[3] == "O" && item[0].board[6] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
+        for (let i = 0; i < winner.length; i++) {
+            const [x, y, z] = winner[i];
+            
+            if(item[0].board[x] && item[0].board[x] === item[0].board[y] && item[0].board[y] === item[0].board[z] ){
+                handleScorePoints();
+                handleReset();
+                return item[0].board[x];
+            }
             
         }
-        if(item[0].board[1] == "X" && item[0].board[4] == "X" && item[0].board[7] == "X" || item[0].board[1] == "O" && item[0].board[4] == "O" && item[0].board[7] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
-        if(item[0].board[2] == "X" && item[0].board[5] == "X" && item[0].board[8] == "X" || item[0].board[2] == "O" && item[0].board[5] == "O" && item[0].board[8] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
-        
-        if(item[0].board[0] == "X" && item[0].board[4] == "X" && item[0].board[8] == "X" || item[0].board[0] == "O" && item[0].board[4] == "O" && item[0].board[8] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
-        if(item[0].board[6] == "X" && item[0].board[4] == "X" && item[0].board[2] == "X" || item[0].board[6] == "O" && item[0].board[4] == "O" && item[0].board[2] == "O"){
-            handleScorePoints();
-            handleReset();
-            setChangeplayer(true)
-        }
+    }
 
+    function handleBoardFull(){
+        let checkTied = true;
+
+        item[0].board.forEach((item) => {
+            if(item == ""){
+                checkTied = false;
+            }
+        })
+
+        if(checkTied){
+            alert('empate')
+            handleReset();
+        }
     }
 
     function handleReset(){
