@@ -17,7 +17,7 @@ export const Header = styled.View`
 `;
 
 export const Main = styled.View`
-    height: 400px;
+    height: 380px;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
