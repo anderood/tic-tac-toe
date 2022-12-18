@@ -14,11 +14,10 @@ import {
 export function Dashboard(){
 
     
-    const initialValues = [ { board: ["","","","","","","","","",] }]
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
     const InitialScorePoints = [ { score: [0,0] }]
 
-    const [ item, setItem ] = useState(initialValues);
+    const [ board, setBoard ] = useState(Array(9).fill(null));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState(InitialScorePoints);
@@ -36,71 +35,8 @@ export function Dashboard(){
         [6,4,2]
     ];
 
-    function handleCheckPlayer(idx: number){
-
-        const newState = item[0].board.map((elem, index, arr) => {
-            if(idx === index) {
-                changeplayer ? arr[idx] = "X" : arr[idx] = "O";  
-            } 
-            return {...item[0], arr};
-        });
-
-        setItem([...newState])
-        setChangeplayer(!changeplayer)
-        handleCheckWinner();
-        handleBoardFull();
-        
-    }
-
-    function handleCheckWinner(){
-
-        for (let i = 0; i < winner.length; i++) {
-            const [x, y, z] = winner[i];
-            
-            if(item[0].board[x] && item[0].board[x] === item[0].board[y] && item[0].board[y] === item[0].board[z] ){
-                handleScorePoints();
-                handleReset();
-                return item[0].board[x];
-            }
-            
-        }
-    }
-
-    function handleBoardFull(){
-        let checkTied = true;
-
-        item[0].board.forEach((item) => {
-            if(item == ""){
-                checkTied = false;
-            }
-        })
-
-        if(checkTied){
-            alert('empate')
-            handleReset();
-        }
-    }
-
-    function handleReset(){
-
-        setItem([ {board: ["","","","","","","","","",]}])
-        setChangeplayer(true)
-    }
-
-    function handleScorePoints(){
-
-        scores[0].score.map((item, idx, arr) => {
-            if(changeplayer === true){
-                setScoresPlayer1(scoresPlayer1 +1)
-                arr[0] = scoresPlayer1;
-                alert("Player 1, Ganhou")
-            }else {
-                setScoresPlayer2(scoresPlayer2 +1)
-                arr[1] = scoresPlayer2;
-                alert("Player 2, Ganhou")
-            }
-        })
-        
+    function handleFillBoard(idx){
+        console.log(idx)
     }
     
     return(
@@ -117,12 +53,12 @@ export function Dashboard(){
             </Header>
             <Main>
                 {
-                    item[0].board.map( (elem, idx) => 
+                    board.map( (elem, idx) => 
                         <ButtonBoard 
                             key={idx} 
-                            title={item[0].board[idx]} 
-                            onPress={ () => handleCheckPlayer(idx)} 
-                            disabled={item[0].board[idx] ? true : false}
+                            title={board[idx]} 
+                            onPress={ () => handleFillBoard(idx)} 
+                            disabled={board[idx] ? true : false}
                         />)
                 }
 
@@ -130,7 +66,6 @@ export function Dashboard(){
             <Footer>
                 <Button 
                     title="Reset"
-                    onPress={handleReset}
                     disabled={false}
                 />
             </Footer>
