@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Player } from "../../components/Player";
 import { ButtonBoard } from "../../components/ButtonBoard";
@@ -17,12 +17,20 @@ export function Dashboard(){
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
     const InitialScorePoints = [ { score: [0,0] }]
 
-    const [ board, setBoard ] = useState(Array(9).fill(null));
+    const [ board, setBoard ] = useState(Array(9).fill(""));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState(InitialScorePoints);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
+    const [ count, setCount ] = useState(1);
+
+    useEffect(() => {
+        handleCheckWinner() 
+        console.log(board)
+        // console.log(changeplayer)
+    }, [board])
+    useEffect(() => {handlePlayCPU()}, [changeplayer])
 
     const winner = [
         [0,1,2],
@@ -36,8 +44,66 @@ export function Dashboard(){
     ];
 
     function handleFillBoard(idx){
-        console.log(idx)
+        
+        const upBoard = [...board];
+        upBoard[idx] = "X";
+        setBoard(upBoard);
+        setChangeplayer(!changeplayer)
     }
+
+    function handleCheckWinner(){
+
+        for (let i = 0; i < winner.length; i++) {
+            const [x, y, z] = winner[i];
+
+            if(board[x] && board[x] === board[y] && board[y] === board[z] && board[z]){
+                alert('Winner')
+            }
+            
+        }
+    }
+
+    function handlePlayCPU(){
+        const numberAle = getRandomIntInclusive(0,8);
+        // console.log(numberAle)
+
+        if(changeplayer == false){
+
+            const newBoard = [...board];
+    
+            newBoard[numberAle] == "" ? newBoard[numberAle]="O" : handleChekBoard();
+            setBoard(newBoard)
+            console.log(newBoard)
+        }
+
+    }
+
+    function handleChekBoard(){
+
+
+        for (let i = 0; i < board.length; i++) {
+            
+            if(board[i] == ""){
+                console.log({for: i})
+                setCount(count +1)
+            }
+        }
+
+        if(count >= 1){
+            handlePlayCPU();
+        }
+
+        console.log({count: count});
+        
+    }
+
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+      
+      
     
     return(
         <Container>
