@@ -23,14 +23,12 @@ export function Dashboard(){
     const [ scores, setScores ] = useState(InitialScorePoints);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
-    const [ count, setCount ] = useState(1);
+    const [ count, setCount ] = useState(0);
 
     useEffect(() => {
         handleCheckWinner() 
-        console.log(board)
-        // console.log(changeplayer)
+        handlePlayCPU()
     }, [board])
-    useEffect(() => {handlePlayCPU()}, [changeplayer])
 
     const winner = [
         [0,1,2],
@@ -47,8 +45,8 @@ export function Dashboard(){
         
         const upBoard = [...board];
         upBoard[idx] = "X";
-        setBoard(upBoard);
         setChangeplayer(!changeplayer)
+        setBoard(upBoard);
     }
 
     function handleCheckWinner(){
@@ -64,16 +62,15 @@ export function Dashboard(){
     }
 
     function handlePlayCPU(){
-        const numberAle = getRandomIntInclusive(0,8);
-        // console.log(numberAle)
+        const pos = getRandomIntInclusive(0,8);
 
         if(changeplayer == false){
 
             const newBoard = [...board];
     
-            newBoard[numberAle] == "" ? newBoard[numberAle]="O" : handleChekBoard();
+            newBoard[pos] == "" ? newBoard[pos]="O" : handleChekBoard();
+            setChangeplayer(!changeplayer)
             setBoard(newBoard)
-            console.log(newBoard)
         }
 
     }
@@ -81,19 +78,15 @@ export function Dashboard(){
     function handleChekBoard(){
 
 
-        for (let i = 0; i < board.length; i++) {
-            
-            if(board[i] == ""){
-                console.log({for: i})
-                setCount(count +1)
-            }
-        }
+       board.forEach((elem) => {
+           if(elem == ""){
+               setCount((prevCount) => prevCount +1)
+           }
+       })
 
-        if(count >= 1){
+        if(count > 1){
             handlePlayCPU();
         }
-
-        console.log({count: count});
         
     }
 
