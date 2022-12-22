@@ -24,7 +24,7 @@ export function Home({ navigation }){
             </ContainerTitle>
             <ContainerButtons>
                 <Button 
-                    title="Um Jogador"
+                    title="Iniciar"
                     onPress={ ()=> navigation.navigate('Dashboard') }
                 />
                 <Button 

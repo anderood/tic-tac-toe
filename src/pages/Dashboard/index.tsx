@@ -23,11 +23,13 @@ export function Dashboard(){
     const [ scores, setScores ] = useState(InitialScorePoints);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
-    const [ count, setCount ] = useState(0);
 
     useEffect(() => {
-        handleCheckWinner() 
         handlePlayCPU()
+    }, [changeplayer])
+
+    useEffect(() => {
+        handleCheckWinner()
     }, [board])
 
     const winner = [
@@ -45,8 +47,10 @@ export function Dashboard(){
         
         const upBoard = [...board];
         upBoard[idx] = "X";
-        setChangeplayer(!changeplayer)
         setBoard(upBoard);
+        setChangeplayer(false)
+        
+
     }
 
     function handleCheckWinner(){
@@ -62,40 +66,27 @@ export function Dashboard(){
     }
 
     function handlePlayCPU(){
-        const pos = getRandomIntInclusive(0,8);
 
+        const positions = [];
+        
+        board.map((elem, index) => {
+            if(elem === ""){
+                positions.push(index);
+            }
+        });
+       
+
+        const choseOption = positions[Math.floor(Math.random() * positions.length)];
+        
         if(changeplayer == false){
 
-            const newBoard = [...board];
-    
-            newBoard[pos] == "" ? newBoard[pos]="O" : handleChekBoard();
-            setChangeplayer(!changeplayer)
-            setBoard(newBoard)
+            const upBoard = [...board];
+            upBoard[choseOption] = "O";
+            setBoard(upBoard);
+            setChangeplayer(true)
         }
 
     }
-
-    function handleChekBoard(){
-
-
-       board.forEach((elem) => {
-           if(elem == ""){
-               setCount((prevCount) => prevCount +1)
-           }
-       })
-
-        if(count > 1){
-            handlePlayCPU();
-        }
-        
-    }
-
-    function getRandomIntInclusive(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-      
       
     
     return(
@@ -123,10 +114,10 @@ export function Dashboard(){
 
             </Main>
             <Footer>
-                <Button 
+                {/* <Button 
                     title="Reset"
                     disabled={false}
-                />
+                /> */}
             </Footer>
         </Container>
     );
