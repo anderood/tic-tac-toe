@@ -17,8 +17,7 @@ export function Dashboard(){
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
     const InitialScorePoints = [ { score: [0,0] }]
 
-    // const [ board, setBoard ] = useState(Array(9).fill(""));
-    const [ board, setBoard ] = useState(["X","X","O","X","O","X", "", "O", "O" ]);
+    const [ board, setBoard ] = useState(Array(9).fill(""));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState(InitialScorePoints);
@@ -62,17 +61,16 @@ export function Dashboard(){
             const [x, y, z] = winner[i];
 
             if(board[x] && board[x] === board[y] && board[y] === board[z] && board[z]){
-                alert('Winner')
+                changeplayer ? setScoresPlayer1( scoresPlayer1 => scoresPlayer1 +1) : setScoresPlayer2( scoresPlayer2 => scoresPlayer2 +1)
+                return alert('Winner')
             }
             
         }
 
         setCount( count => count +1);
-        console.log(count)
 
-        if( count === 2 && checkBoard){
+        if( count === 10 && checkBoard){
             alert('empate');
-            // handleReset();
         }
 
     }
