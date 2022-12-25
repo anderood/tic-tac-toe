@@ -17,12 +17,14 @@ export function Dashboard(){
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
     const InitialScorePoints = [ { score: [0,0] }]
 
-    const [ board, setBoard ] = useState(Array(9).fill(""));
+    // const [ board, setBoard ] = useState(Array(9).fill(""));
+    const [ board, setBoard ] = useState(["X","X","O","X","O","X", "", "O", "O" ]);
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState(InitialScorePoints);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
+    const [ count, setCount ] = useState(0);
 
     useEffect(() => {
         handlePlayCPU()
@@ -55,6 +57,7 @@ export function Dashboard(){
 
     function handleCheckWinner(){
 
+        
         for (let i = 0; i < winner.length; i++) {
             const [x, y, z] = winner[i];
 
@@ -63,6 +66,26 @@ export function Dashboard(){
             }
             
         }
+
+        setCount( count => count +1);
+        console.log(count)
+
+        if( count === 2 && checkBoard){
+            alert('empate');
+            // handleReset();
+        }
+
+    }
+
+    const checkBoard = () => {
+        return(
+
+            board.map((elem) => {
+                if(elem != ""){
+                    return true;
+                }
+            })
+        )
     }
 
     function handlePlayCPU(){
@@ -86,6 +109,13 @@ export function Dashboard(){
             setChangeplayer(true)
         }
 
+    }
+
+    function handleReset(){
+
+        setBoard(Array(9).fill(""))
+        setChangeplayer(true)
+        setCount(0)
     }
       
     
@@ -114,10 +144,11 @@ export function Dashboard(){
 
             </Main>
             <Footer>
-                {/* <Button 
+                <Button 
                     title="Reset"
                     disabled={false}
-                /> */}
+                    onPress={handleReset}
+                />
             </Footer>
         </Container>
     );
