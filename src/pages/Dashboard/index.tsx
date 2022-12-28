@@ -15,22 +15,18 @@ export function Dashboard(){
 
     
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
-    const InitialScorePoints = [ { score: [0,0] }]
 
     const [ board, setBoard ] = useState(Array(9).fill(""));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
-    const [ scores, setScores ] = useState(InitialScorePoints);
+    const [ scores, setScores ] = useState([0,0]);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
     const [ count, setCount ] = useState(0);
 
     useEffect(() => {
-        handlePlayCPU()
-    }, [changeplayer])
-
-    useEffect(() => {
         handleCheckWinner()
+        handlePlayCPU();
     }, [board])
 
     const winner = [
@@ -48,24 +44,24 @@ export function Dashboard(){
         
         const upBoard = [...board];
         upBoard[idx] = "X";
+        setChangeplayer(!changeplayer)
         setBoard(upBoard);
-        setChangeplayer(false)
-        
-
     }
 
     function handleCheckWinner(){
 
-        
-        for (let i = 0; i < winner.length; i++) {
-            const [x, y, z] = winner[i];
+        console.log(changeplayer)
+
+        winner.forEach((elem, idx) => {
+            const [x,y,z] = winner[idx];
 
             if(board[x] && board[x] === board[y] && board[y] === board[z] && board[z]){
-                changeplayer ? setScoresPlayer1( scoresPlayer1 => scoresPlayer1 +1) : setScoresPlayer2( scoresPlayer2 => scoresPlayer2 +1)
+                !changeplayer ? setScoresPlayer1( scoresPlayer1 => scoresPlayer1 +1) : setScoresPlayer2( scoresPlayer2 => scoresPlayer2 +1)
+                console.log({ setScoresPlayer1: scoresPlayer1 })
+                console.log({ setScoresPlayer2: scoresPlayer2 })
                 return alert('Winner')
             }
-            
-        }
+        })
 
         setCount( count => count +1);
 
@@ -100,7 +96,6 @@ export function Dashboard(){
         const choseOption = positions[Math.floor(Math.random() * positions.length)];
         
         if(changeplayer == false){
-
             const upBoard = [...board];
             upBoard[choseOption] = "O";
             setBoard(upBoard);
@@ -125,7 +120,7 @@ export function Dashboard(){
                         <Player 
                             key={idx}
                             title={players[0].players[idx]}
-                            scoresPoints={scores[0].score[idx]}
+                            scoresPoints={scores[idx]}
                         />)
                 }
             </Header>
