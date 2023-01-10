@@ -59,59 +59,37 @@ export function Dashboard(){
         if(checkWin()){
             return;
         }else {
-            const upBoard = [...board];
-            upBoard[Number(position)]="X";
-            setBoard(upBoard);
-            setChangeplayer(!changeplayer)
+
+            if(!changeplayer){
+                
+                const upBoard = [...board];
+                upBoard[Number(position)]="X";
+                setBoard(upBoard);
+                setChangeplayer(!changeplayer)
+
+            }else {
+                const pos = [];
+                
+                board.map((elem, index) => {
+                    if(elem === ""){
+                        pos.push(index);
+                    }
+                })
+                const choseOption = pos[Math.floor(Math.random() * pos.length)];
+
+                const upBoard = [...board];
+                upBoard[choseOption] = "O";
+                setBoard(upBoard);
+                setChangeplayer(!changeplayer)
+                
+            }
         };
 
 
     }, [position]);
 
-    useEffect(()=> {
-
-        const pos = [];
-        const choseOption = pos[Math.floor(Math.random() * pos.length)];
-
-        const checkWin = () => {
-
-            for (let i = 0; i < winner.length; i++) {
-                const [x, y, z] = winner[i];
-
-                if( board[x] && board[x] === board[y] && board[y] === board[z] ){
-                    console.log({winner: 'entrei'})
-                    return true
-                }
-            }
-
-            return false;
-       } 
-
-        if(checkWin()){
-            return;
-        }else {
-            const upBoard = [...board];
-            upBoard[choseOption]="0";
-            setBoard(upBoard);
-        };
-        
-
-
-    }, [changeplayer])
-
     function handleClickButton(idx){
         setPosition(idx)
-    }
-
-    const checkBoard = ()=> {
-
-        return(
-            board.map((elem) => {
-                if(elem != ""){
-                    return true;
-                }
-            })
-        )
     }
       
     
@@ -140,11 +118,11 @@ export function Dashboard(){
 
             </Main>
             <Footer>
-                <Button 
+                {/* <Button 
                     title="Reset"
                     disabled={false}
                     // onPress={handleReset}
-                />
+                /> */}
             </Footer>
         </Container>
     );
