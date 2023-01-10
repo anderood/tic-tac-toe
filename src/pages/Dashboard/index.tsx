@@ -16,18 +16,17 @@ export function Dashboard(){
     
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
 
-    const [ board, setBoard ] = useState(Array(9).fill(""));
+    // const [ board, setBoard ] = useState(["X","","","X","","","X","",""]);
+    const [ board, setBoard ] = useState(Array(9).fill(''));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState([0,0]);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
     const [ count, setCount ] = useState(0);
+    const [ position, setPosition ] = useState();
+    const [ isWinn, setIsWinn ] = useState(0);
 
-    useEffect(() => {
-        handleCheckWinner()
-        handlePlayCPU();
-    }, [board])
 
     const winner = [
         [0,1,2],
@@ -40,75 +39,79 @@ export function Dashboard(){
         [6,4,2]
     ];
 
-    function handleFillBoard(idx){
-        
-        const upBoard = [...board];
-        upBoard[idx] = "X";
-        setChangeplayer(!changeplayer)
-        setBoard(upBoard);
-    }
 
-    function handleCheckWinner(){
+    useEffect(() => {
 
-        console.log(changeplayer)
+       const checkWin = () => {
 
-        winner.forEach((elem, idx) => {
-            const [x,y,z] = winner[idx];
+            for (let i = 0; i < winner.length; i++) {
+                const [x, y, z] = winner[i];
 
-            if(board[x] && board[x] === board[y] && board[y] === board[z] && board[z]){
-                !changeplayer ? setScoresPlayer1( scoresPlayer1 => scoresPlayer1 +1) : setScoresPlayer2( scoresPlayer2 => scoresPlayer2 +1)
-                console.log({ setScoresPlayer1: scoresPlayer1 })
-                console.log({ setScoresPlayer2: scoresPlayer2 })
-                return alert('Winner')
+                if( board[x] && board[x] === board[y] && board[y] === board[z] ){
+                    console.log({winner: 'entrei'})
+                    return true
+                }
             }
-        })
 
-        setCount( count => count +1);
+            return false;
+       } 
 
-        if( count === 10 && checkBoard){
-            alert('empate');
-        }
+        if(checkWin()){
+            return;
+        }else {
+            const upBoard = [...board];
+            upBoard[Number(position)]="X";
+            setBoard(upBoard);
+            setChangeplayer(!changeplayer)
+        };
 
+
+    }, [position]);
+
+    useEffect(()=> {
+
+        const pos = [];
+        const choseOption = pos[Math.floor(Math.random() * pos.length)];
+
+        const checkWin = () => {
+
+            for (let i = 0; i < winner.length; i++) {
+                const [x, y, z] = winner[i];
+
+                if( board[x] && board[x] === board[y] && board[y] === board[z] ){
+                    console.log({winner: 'entrei'})
+                    return true
+                }
+            }
+
+            return false;
+       } 
+
+        if(checkWin()){
+            return;
+        }else {
+            const upBoard = [...board];
+            upBoard[choseOption]="0";
+            setBoard(upBoard);
+        };
+        
+
+
+    }, [changeplayer])
+
+    function handleClickButton(idx){
+        setPosition(idx)
     }
 
-    const checkBoard = () => {
-        return(
+    const checkBoard = ()=> {
 
+        return(
             board.map((elem) => {
                 if(elem != ""){
                     return true;
                 }
             })
         )
-    }
-
-    function handlePlayCPU(){
-
-        const positions = [];
-        
-        board.map((elem, index) => {
-            if(elem === ""){
-                positions.push(index);
-            }
-        });
-       
-
-        const choseOption = positions[Math.floor(Math.random() * positions.length)];
-        
-        if(changeplayer == false){
-            const upBoard = [...board];
-            upBoard[choseOption] = "O";
-            setBoard(upBoard);
-            setChangeplayer(true)
-        }
-
-    }
-
-    function handleReset(){
-
-        setBoard(Array(9).fill(""))
-        setChangeplayer(true)
-        setCount(0)
     }
       
     
@@ -130,7 +133,7 @@ export function Dashboard(){
                         <ButtonBoard 
                             key={idx} 
                             title={board[idx]} 
-                            onPress={ () => handleFillBoard(idx)} 
+                            onPress={ () => handleClickButton(idx)} 
                             disabled={board[idx] ? true : false}
                         />)
                 }
@@ -140,7 +143,7 @@ export function Dashboard(){
                 <Button 
                     title="Reset"
                     disabled={false}
-                    onPress={handleReset}
+                    // onPress={handleReset}
                 />
             </Footer>
         </Container>
