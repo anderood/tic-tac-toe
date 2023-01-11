@@ -16,17 +16,13 @@ export function Dashboard(){
     
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
 
-    // const [ board, setBoard ] = useState(["X","","","X","","","X","",""]);
+    // const [ board, setBoard ] = useState(["O","O","","X","","","X","",""]);
     const [ board, setBoard ] = useState(Array(9).fill(''));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState([0,0]);
     const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
     const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
-    const [ count, setCount ] = useState(0);
-    const [ position, setPosition ] = useState();
-    const [ isWinn, setIsWinn ] = useState(0);
-
 
     const winner = [
         [0,1,2],
@@ -39,58 +35,64 @@ export function Dashboard(){
         [6,4,2]
     ];
 
-
     useEffect(() => {
 
-       const checkWin = () => {
+        handleChangePlayer();
+       
+    }, [board]);
 
-            for (let i = 0; i < winner.length; i++) {
-                const [x, y, z] = winner[i];
-
-                if( board[x] && board[x] === board[y] && board[y] === board[z] ){
-                    console.log({winner: 'entrei'})
-                    return true
-                }
-            }
-
-            return false;
-       } 
-
+    function handleClickButton(idx){
+        
         if(checkWin()){
             return;
         }else {
-
-            if(!changeplayer){
-                
+            if(changeplayer){
                 const upBoard = [...board];
-                upBoard[Number(position)]="X";
+                upBoard[idx] = "X";
                 setBoard(upBoard);
-                setChangeplayer(!changeplayer)
-
-            }else {
-                const pos = [];
-                
-                board.map((elem, index) => {
-                    if(elem === ""){
-                        pos.push(index);
-                    }
-                })
-                const choseOption = pos[Math.floor(Math.random() * pos.length)];
-
-                const upBoard = [...board];
-                upBoard[choseOption] = "O";
-                setBoard(upBoard);
-                setChangeplayer(!changeplayer)
-                
+                setChangeplayer(false)
             }
-        };
-
-
-    }, [position]);
-
-    function handleClickButton(idx){
-        setPosition(idx)
+            
+            
+        }
     }
+
+    function handleChangePlayer(){
+        if(checkWin()){
+            return;
+        }else {
+            if(changeplayer === false){
+
+                const pos = [];
+                    
+                    board.map((elem, index) => {
+                        if(elem === ""){
+                            pos.push(index);
+                        }
+                    })
+                    const choseOption = pos[Math.floor(Math.random() * pos.length)];
+    
+                    const upBoard = [...board];
+                    upBoard[choseOption] = "O";
+                    setBoard(upBoard);
+                    setChangeplayer(true)
+            }
+        }
+    }
+
+    const checkWin = () => {
+
+        for (let i = 0; i < winner.length; i++) {
+            const [x, y, z] = winner[i];
+
+            if( board[x] && board[x] === board[y] && board[y] === board[z] ){
+                !changeplayer ? setScoresPlayer1(scoresPlayer1 +1) : setScoresPlayer2(scoresPlayer2 +1)
+                return true
+            }
+        }
+
+        return false;
+   }
       
     
     return(
