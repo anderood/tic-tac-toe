@@ -21,8 +21,6 @@ export function Dashboard(){
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState([0,0]);
-    const [ scoresPlayer1, setScoresPlayer1 ] = useState(1);
-    const [ scoresPlayer2, setScoresPlayer2 ] = useState(1);
 
     const winner = [
         [0,1,2],
@@ -41,7 +39,7 @@ export function Dashboard(){
        
     }, [board]);
 
-    function handleClickButton(idx){
+    function handlePressButton(idx){
         
         if(checkWin()){
             return;
@@ -58,6 +56,7 @@ export function Dashboard(){
     }
 
     function handleChangePlayer(){
+
         if(checkWin()){
             return;
         }else {
@@ -65,17 +64,17 @@ export function Dashboard(){
 
                 const pos = [];
                     
-                    board.map((elem, index) => {
-                        if(elem === ""){
-                            pos.push(index);
-                        }
-                    })
-                    const choseOption = pos[Math.floor(Math.random() * pos.length)];
-    
-                    const upBoard = [...board];
-                    upBoard[choseOption] = "O";
-                    setBoard(upBoard);
-                    setChangeplayer(true)
+                board.map((elem, index) => {
+                    if(elem === ""){
+                        pos.push(index);
+                    }
+                })
+                const choseOption = pos[Math.floor(Math.random() * pos.length)];
+
+                const upBoard = [...board];
+                upBoard[choseOption] = "O";
+                setBoard(upBoard);
+                setChangeplayer(true)
             }
         }
     }
@@ -86,7 +85,13 @@ export function Dashboard(){
             const [x, y, z] = winner[i];
 
             if( board[x] && board[x] === board[y] && board[y] === board[z] ){
-                !changeplayer ? setScoresPlayer1(scoresPlayer1 +1) : setScoresPlayer2(scoresPlayer2 +1)
+                
+                const changeScores = [...scores];
+
+                changeScores[Number(changeplayer)] +=1;
+
+                setScores(changeScores)
+
                 return true
             }
         }
@@ -113,7 +118,7 @@ export function Dashboard(){
                         <ButtonBoard 
                             key={idx} 
                             title={board[idx]} 
-                            onPress={ () => handleClickButton(idx)} 
+                            onPress={ () => handlePressButton(idx)} 
                             disabled={board[idx] ? true : false}
                         />)
                 }
