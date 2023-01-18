@@ -16,7 +16,7 @@ export function Dashboard(){
     
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
 
-    // const [ board, setBoard ] = useState(["O","O","","X","","","X","",""]);
+    // const [ board, setBoard ] = useState(["O","O","X","X","","O","O","",""]);
     const [ board, setBoard ] = useState(Array(9).fill(''));
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
@@ -50,14 +50,12 @@ export function Dashboard(){
                 setBoard(upBoard);
                 setChangeplayer(false)
             }
-            
-            
         }
     }
 
     function handleChangePlayer(){
 
-        if(checkWin()){
+        if(checkWin() || checkBoard()){
             return;
         }else {
             if(changeplayer === false){
@@ -97,6 +95,24 @@ export function Dashboard(){
         }
 
         return false;
+   }
+
+   const checkBoard = () => {
+        const pos = [];
+                        
+        board.map((elem, index) => {
+            if(elem === ""){
+                pos.push(index);
+            }
+        })
+
+        if(pos.length === 0){
+            alert('empate')
+            return true;
+        }else{
+            return false;
+        }
+
    }
       
     
