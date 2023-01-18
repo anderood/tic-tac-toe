@@ -89,6 +89,7 @@ export function Dashboard(){
                 changeScores[Number(changeplayer)] +=1;
 
                 setScores(changeScores)
+                !changeplayer ? alert('Jogador 1 Ganhou') : alert('Jogador 2 Ganhou')
 
                 return true
             }
