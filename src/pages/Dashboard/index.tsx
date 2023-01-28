@@ -99,9 +99,9 @@ export function Dashboard(){
         }
 
         return false;
-   }
+    }
 
-   const checkBoard = () => {
+    const checkBoard = () => {
         const pos = [];
                         
         board.map((elem, index) => {
@@ -117,7 +117,13 @@ export function Dashboard(){
             return false;
         }
 
-   }
+    }
+
+    function handleCloseModal(){
+        setIsOpen(false)
+        setBoard(Array(9).fill(''));
+        setChangeplayer(true)
+    }
       
     
     return(
@@ -144,7 +150,12 @@ export function Dashboard(){
                 }
 
             </Main>
-            <ViewModal title="Atenção!" information={ !changeplayer ? 'Ponto para Jogador 1' : 'Ponto para Jogador 2'} visible={isOpen}/>
+            <ViewModal 
+                title="Atenção!" 
+                information={ !changeplayer ? 'Ponto para Jogador 1' : 'Ponto para Jogador 2'} 
+                visible={isOpen} 
+                handleCloseModal={handleCloseModal}
+            />
             
         </Container>
     );

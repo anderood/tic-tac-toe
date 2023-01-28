@@ -5,10 +5,12 @@ import { Container, Section, InformationView, Title, InfoText } from "./styles";
 interface ViewModalProps {
     title: string;
     information: string;
-    visible: boolean
+    visible: boolean;
+    handleCloseModal: ()=>void;
 }
 
-export function ViewModal( { title, information, visible }: ViewModalProps){
+export function ViewModal( { title, information, visible, handleCloseModal }: ViewModalProps){
+
     return(
         <View>
             <Modal
@@ -39,10 +41,11 @@ export function ViewModal( { title, information, visible }: ViewModalProps){
                             marginBottom: 10,
                             margin: 10,
                         }}>
-                        <Text style={{color: 'black', margin: 15}}>Voltar</Text>
+                        <Text style={{color: 'black', margin: 15}}>Desistir</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         // activeOpacity={0.9}
+                        onPress={ handleCloseModal }
                         style={{
                             width: '45%',
                             borderRadius: 0,
@@ -55,7 +58,7 @@ export function ViewModal( { title, information, visible }: ViewModalProps){
                             marginBottom: 10,
                             marginTop: 10,
                         }}>
-                        <Text style={{color: 'black', margin: 15}}>Jogar Novamente</Text>
+                        <Text style={{color: 'black', margin: 15}}>Jogar de Novo</Text>
                     </TouchableOpacity>
                     </View>
                 </Section>
