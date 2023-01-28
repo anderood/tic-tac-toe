@@ -9,26 +9,29 @@ export const Container = styled.View`
 
 export const Section = styled.View`
     align-items: center;
-    background-color: #fff;
+    background-color: #605090;
     width: 90%;
     border-width: 1px;
     border-radius: 7px;
+    border: #FFF;
 `;
 
 export const InformationView = styled.View`
 
     align-items: center;
     margin: 10px;
-
-`;
+    
+    `;
 
 export const Title = styled.Text`
     font-size: 25px;
     margin-top: 5px;
-`;
+    color: #FFF;
+    `;
 export const InfoText = styled.Text`
     font-size: 18px;
     margin-top: 5px;
+    color: #FFF;
 `;
 
 

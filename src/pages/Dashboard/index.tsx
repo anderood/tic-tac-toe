@@ -22,6 +22,7 @@ export function Dashboard(){
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState([0,0]);
+    const [ isOpen, setIsOpen ] = useState(false);
 
     const winner = [
         [0,1,2],
@@ -90,7 +91,8 @@ export function Dashboard(){
                 changeScores[Number(changeplayer)] +=1;
 
                 setScores(changeScores)
-                !changeplayer ? alert('Jogador 1 Ganhou') : alert('Jogador 2 Ganhou')
+                // !changeplayer ? alert('Jogador 1 Ganhou') : alert('Jogador 2 Ganhou')
+                setIsOpen(true)
 
                 return true
             }
@@ -142,14 +144,8 @@ export function Dashboard(){
                 }
 
             </Main>
-            <ViewModal title="Titulo" information="informação" visible={true} transparent={true}/>
-            <Footer>
-                {/* <Button 
-                    title="Reset"
-                    disabled={false}
-                    // onPress={handleReset}
-                /> */}
-            </Footer>
+            <ViewModal title="Atenção!" information={ !changeplayer ? 'Ponto para Jogador 1' : 'Ponto para Jogador 2'} visible={isOpen}/>
+            
         </Container>
     );
 }

@@ -12,7 +12,7 @@ export function ViewModal( { title, information, visible }: ViewModalProps){
     return(
         <View>
             <Modal
-                visible={true}
+                visible={visible}
                 animationType={'fade'}
                 transparent={true}
                 >
@@ -22,23 +22,42 @@ export function ViewModal( { title, information, visible }: ViewModalProps){
                         <Title>{title}</Title>
                         <InfoText>{information}</InfoText>
                     </InformationView>
+                    <View style={{flexDirection: "row"}}>
+
                     <TouchableOpacity
-                        activeOpacity={0.9}
+                        // activeOpacity={0.9}
                         style={{
-                            width: '95%',
+                            width: '45%',
                             borderRadius: 0,
                             alignItems: 'center',
                             justifyContent: 'center',
-                            backgroundColor: 'blue',
-                            borderColor: '#ddd',
+                            backgroundColor: '#ffeb3b',
+                            // borderColor: '#ddd',
                             borderBottomWidth: 0,
-                            borderRadius: 5,
+                            // borderRadius: 5,
+                            bottom: 0,
+                            marginBottom: 10,
+                            margin: 10,
+                        }}>
+                        <Text style={{color: 'black', margin: 15}}>Voltar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        // activeOpacity={0.9}
+                        style={{
+                            width: '45%',
+                            borderRadius: 0,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundColor: '#ffeb3b',
+                            borderBottomWidth: 0,
+                            // borderRadius: 5,
                             bottom: 0,
                             marginBottom: 10,
                             marginTop: 10,
                         }}>
-                        <Text style={{color: 'white', margin: 15}}>OK</Text>
+                        <Text style={{color: 'black', margin: 15}}>Jogar Novamente</Text>
                     </TouchableOpacity>
+                    </View>
                 </Section>
             </Container>
             </Modal>
