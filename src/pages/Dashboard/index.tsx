@@ -10,6 +10,7 @@ import {
     Main,
     Footer,
 } from './styles';
+import { ViewModal } from "../../components/ViewModal/Index";
 
 export function Dashboard(){
 
@@ -141,6 +142,7 @@ export function Dashboard(){
                 }
 
             </Main>
+            <ViewModal title="Titulo" information="informação" visible={true} transparent={true}/>
             <Footer>
                 {/* <Button 
                     title="Reset"
