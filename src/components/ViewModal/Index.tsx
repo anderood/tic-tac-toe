@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import { Container, Section, InformationView, Title, InfoText } from "./styles";
 
@@ -10,6 +11,8 @@ interface ViewModalProps {
 }
 
 export function ViewModal( { title, information, visible, handleCloseModal }: ViewModalProps){
+
+    const navigation = useNavigation();
 
     return(
         <View>
@@ -28,6 +31,7 @@ export function ViewModal( { title, information, visible, handleCloseModal }: Vi
 
                     <TouchableOpacity
                         // activeOpacity={0.9}
+                        onPress={ () => navigation.goBack() }
                         style={{
                             width: '45%',
                             borderRadius: 0,
