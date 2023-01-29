@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Player } from "../../components/Player";
 import { ButtonBoard } from "../../components/ButtonBoard";
-import { Button } from "../../components/Button";
 
 import {
     Container,
     Header,
     Main,
-    Footer,
 } from './styles';
 import { ViewModal } from "../../components/ViewModal/Index";
 
 export function Dashboard(){
 
-    
+    const navigation = useNavigation();
     const InitialPlayers = [ { players: ["Jogador 1","Jogador 2"] }]
 
     // const [ board, setBoard ] = useState(["O","O","X","X","","O","O","",""]);
@@ -23,6 +22,7 @@ export function Dashboard(){
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState([0,0]);
     const [ isOpen, setIsOpen ] = useState(false);
+    const [ isMultPlayer, setIsMultiPlayer ] = useState(false);
 
     const winner = [
         [0,1,2],
@@ -35,22 +35,40 @@ export function Dashboard(){
         [6,4,2]
     ];
 
+    const { routes } = navigation.getState();
+
+
+    useEffect(() => {
+        routes[1].params ? handleMultiPlayer() : ''
+        
+    }, []);
+    
     useEffect(() => {
 
         handleChangePlayer();
        
     }, [board]);
 
-    function handlePressButton(idx){
+    function handlePressButton(idx: number){
         
         if(checkWin()){
             return;
         }else {
-            if(changeplayer){
+            if(isMultPlayer){
+
                 const upBoard = [...board];
-                upBoard[idx] = "X";
+                upBoard[idx] = changeplayer ? "X": "O";
                 setBoard(upBoard);
-                setChangeplayer(false)
+                setChangeplayer(!changeplayer)
+
+            }else {
+
+                if(changeplayer){
+                    const upBoard = [...board];
+                    upBoard[idx] = "X";
+                    setBoard(upBoard);
+                    setChangeplayer(false)
+                }
             }
         }
     }
@@ -60,21 +78,27 @@ export function Dashboard(){
         if(checkWin() || checkBoard()){
             return;
         }else {
-            if(changeplayer === false){
 
-                const pos = [];
-                    
-                board.map((elem, index) => {
-                    if(elem === ""){
-                        pos.push(index);
-                    }
-                })
-                const choseOption = pos[Math.floor(Math.random() * pos.length)];
-
-                const upBoard = [...board];
-                upBoard[choseOption] = "O";
-                setBoard(upBoard);
-                setChangeplayer(true)
+            if(isMultPlayer){
+                return;
+                
+            }else {
+                if(changeplayer === false){
+    
+                    const pos = [];
+                        
+                    board.map((elem, index) => {
+                        if(elem === ""){
+                            pos.push(index);
+                        }
+                    })
+                    const choseOption = pos[Math.floor(Math.random() * pos.length)];
+    
+                    const upBoard = [...board];
+                    upBoard[choseOption] = "O";
+                    setBoard(upBoard);
+                    setChangeplayer(true)
+                }
             }
         }
     }
@@ -91,7 +115,6 @@ export function Dashboard(){
                 changeScores[Number(changeplayer)] +=1;
 
                 setScores(changeScores)
-                // !changeplayer ? alert('Jogador 1 Ganhou') : alert('Jogador 2 Ganhou')
                 setIsOpen(true)
 
                 return true
@@ -123,6 +146,10 @@ export function Dashboard(){
         setIsOpen(false)
         setBoard(Array(9).fill(''));
         setChangeplayer(true)
+    }
+
+    function handleMultiPlayer(){
+        setIsMultiPlayer(true);
     }
       
     

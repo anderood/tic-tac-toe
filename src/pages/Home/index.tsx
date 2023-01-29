@@ -29,7 +29,7 @@ export function Home({ navigation }){
                 />
                 <Button 
                     title="Dois Jogadores"
-                    onPress={ ()=> navigation.navigate('Dashboard') }
+                    onPress={ ()=> navigation.navigate('Dashboard', { isMulti: true }) }
                 />
             </ContainerButtons>
         </Container>
