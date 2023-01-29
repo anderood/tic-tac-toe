@@ -30,37 +30,30 @@ export function ViewModal( { title, information, visible, handleCloseModal }: Vi
                     <View style={{flexDirection: "row"}}>
 
                     <TouchableOpacity
-                        // activeOpacity={0.9}
                         onPress={ () => navigation.goBack() }
                         style={{
                             width: '45%',
-                            borderRadius: 0,
+                            borderRadius: 10,
                             alignItems: 'center',
-                            justifyContent: 'center',
                             backgroundColor: '#ffeb3b',
-                            // borderColor: '#ddd',
-                            borderBottomWidth: 0,
-                            // borderRadius: 5,
                             bottom: 0,
                             marginBottom: 10,
-                            margin: 10,
+                            marginTop: 10,
+                            margin: 5,
                         }}>
                         <Text style={{color: 'black', margin: 15}}>Desistir</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        // activeOpacity={0.9}
                         onPress={ handleCloseModal }
                         style={{
                             width: '45%',
-                            borderRadius: 0,
+                            borderRadius: 10,
                             alignItems: 'center',
-                            justifyContent: 'center',
                             backgroundColor: '#ffeb3b',
-                            borderBottomWidth: 0,
-                            // borderRadius: 5,
                             bottom: 0,
                             marginBottom: 10,
                             marginTop: 10,
+                            margin: 5
                         }}>
                         <Text style={{color: 'black', margin: 15}}>Jogar de Novo</Text>
                     </TouchableOpacity>
