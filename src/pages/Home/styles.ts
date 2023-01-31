@@ -34,3 +34,14 @@ export const Title = styled.Text`
 export const ContainerButtons = styled.View`
     align-items: center;
 `;
+
+export const Footer = styled.View`
+    padding: 10px;
+    align-items: center;
+`;
+
+export const Text = styled.Text`
+    padding: 10px;
+    align-items: center;
+    color: #fff;
+`;
