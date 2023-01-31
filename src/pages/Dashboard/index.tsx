@@ -21,6 +21,7 @@ export function Dashboard(){
     const [ changeplayer, setChangeplayer ] = useState(true);
     const [ players, setPlayers ] = useState(InitialPlayers);
     const [ scores, setScores ] = useState([0,0]);
+    const [ isOpenWin, SetIsOpenWin ] = useState(false);
     const [ isOpen, setIsOpen ] = useState(false);
     const [ isMultPlayer, setIsMultiPlayer ] = useState(false);
 
@@ -115,7 +116,7 @@ export function Dashboard(){
                 changeScores[Number(changeplayer)] +=1;
 
                 setScores(changeScores)
-                setIsOpen(true)
+                SetIsOpenWin(true)
 
                 return true
             }
@@ -134,7 +135,7 @@ export function Dashboard(){
         })
 
         if(pos.length === 0){
-            alert('empate')
+            setIsOpen(true)
             return true;
         }else{
             return false;
@@ -144,6 +145,7 @@ export function Dashboard(){
 
     function handleCloseModal(){
         setIsOpen(false)
+        SetIsOpenWin(false)
         setBoard(Array(9).fill(''));
         setChangeplayer(true)
     }
@@ -178,8 +180,14 @@ export function Dashboard(){
 
             </Main>
             <ViewModal 
-                title="Atenção!" 
+                title="Vencedor!" 
                 information={ !changeplayer ? 'Ponto para Jogador 1' : 'Ponto para Jogador 2'} 
+                visible={isOpenWin} 
+                handleCloseModal={handleCloseModal}
+            />
+            <ViewModal 
+                title="Atenção!" 
+                information={ 'Empate Tecnico'} 
                 visible={isOpen} 
                 handleCloseModal={handleCloseModal}
             />
