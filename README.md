@@ -15,6 +15,7 @@ Tambem faz parte do Portifolio pessoal, então ficarei feliz se vc puder me dar 
  - React Native - Expo
  - Styled-Components
  - TypeScript
+ - React Hooks
 
 ## Executar o Projeto
 - passo a passo de como executar o projeto
