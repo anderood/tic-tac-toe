@@ -12,6 +12,11 @@ Tambem faz parte do Portifolio pessoal, então ficarei feliz se vc puder me dar 
 
 ## Tecnologias Utilizadas
 
-React Native - Expo
-Styled-Components
-TypeScript
+ - React Native - Expo
+ - Styled-Components
+ - TypeScript
+
+## Executar o Projeto
+- passo a passo de como executar o projeto
+
+
