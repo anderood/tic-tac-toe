@@ -18,6 +18,20 @@ Tambem faz parte do Portifolio pessoal, então ficarei feliz se vc puder me dar 
  - React Hooks
 
 ## Executar o Projeto
-- passo a passo de como executar o projeto
+- Clonar este repositorio para sua maquina usando:
+
+```
+https://github.com/lucasmontano/openweathermap-reactnative
+```
+- Apos clonado, navegue ate a pasta:
+
+```
+cd tic-tac-toe
+```
+- Execute o comando yarn para instalar todas atualizaões:
+```
+yarn
+```
+
 
 
